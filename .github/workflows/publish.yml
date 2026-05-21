@@ -1,0 +1,68 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force_publish:
+        description: "publish.config.yml の設定に関わらず強制的に公開する"
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # publish.config.yml の enabled フラグを読み取る
+      - name: Check publish config
+        id: config
+        run: |
+          python3 -c "
+          import yaml, os
+          with open('publish.config.yml') as f:
+              cfg = yaml.safe_load(f)
+          enabled = cfg.get('github_pages', {}).get('enabled', False)
+          force = os.environ.get('FORCE_PUBLISH', 'false').lower() == 'true'
+          result = enabled or force
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f'enabled={str(result).lower()}\n')
+          if not result:
+              print('::notice::GitHub Pages 公開は無効です。publish.config.yml の github_pages.enabled を true に変更してください。')
+          "
+        env:
+          FORCE_PUBLISH: ${{ inputs.force_publish }}
+
+      - name: Setup pnpm
+        if: steps.config.outputs.enabled == 'true'
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        if: steps.config.outputs.enabled == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: "pnpm"
+
+      - name: Install dependencies
+        if: steps.config.outputs.enabled == 'true'
+        run: pnpm install
+
+      - name: Build slides
+        if: steps.config.outputs.enabled == 'true'
+        run: pnpm build
+
+      - name: Deploy to GitHub Pages
+        if: steps.config.outputs.enabled == 'true'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

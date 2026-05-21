@@ -1,0 +1,15 @@
+# ============================================================
+# GitHub Pages 公開設定
+# ============================================================
+# enabled を true に変更すると、main ブランチへの push 時に
+# GitHub Pages へ自動デプロイされます。
+#
+# 公開 URL: https://<your-username>.github.io/<repo-name>/
+#
+# 事前に必要な GitHub リポジトリ設定（一度だけ）:
+#   Settings → Pages → Source:
+#   "Deploy from a branch" → Branch: gh-pages / (root)
+# ============================================================
+
+github_pages:
+  enabled: false   # ← true に変更して push すると自動公開されます

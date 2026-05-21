@@ -13,6 +13,40 @@ pnpm dev
 
 ブラウザで http://localhost:3030 を開くと、自動的にスライドが表示されます。
 
+## GitHub Pages 公開設定
+
+このテンプレートは GitHub Actions で自動的に GitHub Pages へ公開できるワークフローを備えています。
+
+### セットアップ手順
+
+1. **リポジトリ設定を確認**
+   - GitHub リポジトリの Settings → Pages にアクセス
+   - Source: "Deploy from a branch" を選択
+   - Branch: `gh-pages` / `(root)` を選択して Save
+
+2. **公開を有効化**
+   - `publish.config.yml` の `enabled` を `true` に変更
+   ```yaml
+   github_pages:
+     enabled: true   # 変更
+   ```
+
+3. **push して自動公開**
+   ```bash
+   git add publish.config.yml
+   git commit -m "Enable GitHub Pages publishing"
+   git push
+   ```
+
+4. **公開 URL**
+   - `https://<your-username>.github.io/<repo-name>/`
+
+### 手動公開（テスト時）
+
+`publish.config.yml` の設定に関わらず強制的に公開する場合：
+- GitHub リポジトリの **Actions** タブから `Publish to GitHub Pages` ワークフローを選択
+- **Run workflow** → `force_publish: true` にチェックして実行
+
 ## スタイルガイド
 
 このテンプレートは以下の技術を使用しています：
