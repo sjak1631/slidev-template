@@ -54,7 +54,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.config.outputs.enabled == 'true'
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Build slides
         if: steps.config.outputs.enabled == 'true'
