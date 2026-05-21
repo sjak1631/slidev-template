@@ -1,6 +1,8 @@
-# Taming Dependency Chaos for LLM in K8S
+# スライドテンプレート
 
 Slidev テンプレートベースのプレゼンテーション。モダンなUIデザイン、インタラクティブなアニメーション、ダークテーマを備えています。
+
+> **Note**: このテンプレートは [BaizeAI/talks](https://github.com/BaizeAI/talks/tree/main/packages/2025-06-11-kubecon-hk) をベースにしています。
 
 ## クイックスタート
 
