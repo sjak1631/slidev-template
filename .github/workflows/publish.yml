@@ -61,7 +61,7 @@ jobs:
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
           echo "Building with base URL: /${REPO_NAME}/"
-          pnpm build -- --base "/${REPO_NAME}/"
+          pnpm exec slidev build --base "/${REPO_NAME}/"
 
       - name: Deploy to GitHub Pages
         if: steps.config.outputs.enabled == 'true'
