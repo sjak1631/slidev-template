@@ -38,8 +38,11 @@ pnpm dev
    git push
    ```
 
-4. **公開 URL**
-   - `https://<your-username>.github.io/<repo-name>/`
+### 公開 URL
+
+公開後は以下の URL でスライドが閲覧できます：
+
+**[https://<your-username>.github.io/<repo-name>/](https://<your-username>.github.io/<repo-name>/)**
 
 ### 手動公開（テスト時）
 
