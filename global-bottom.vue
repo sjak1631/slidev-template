@@ -114,7 +114,7 @@ function usePloy(number = 16) {
       .map(() => [
         applyOverflow(randomBetween(limits.x), overflow),
         applyOverflow(randomBetween(limits.y), overflow),
-      ])
+      ] as Range)
   }
 
   const points = ref(getPoints())
@@ -132,8 +132,10 @@ function usePloy(number = 16) {
           closest = n
         }
       }
-      newPoints.delete(closest)
-      return closest
+      if (closest) {
+        newPoints.delete(closest)
+      }
+      return closest || [0, 0]
     })
   }
 

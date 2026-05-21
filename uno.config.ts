@@ -28,7 +28,7 @@ export default mergeConfigs([
         },
         warn: true,
         collections: {
-          ...createExternalPackageIconLoader('@proj-airi/lobe-icons'),
+          ...createExternalPackageIconLoader('@proj-airi/lobe-icons') as any,
         },
       }),
       presetWebFonts({
