@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+pnpm-debug.log*
+
+# Build outputs
+dist/
+.slidev/
+
+# Environment variables
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+tmp/
+
+# Export outputs
+*.pdf
+*.pptx
